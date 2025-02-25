@@ -2,7 +2,6 @@ package br.com.homolazaus.app.ecommerce.black.red.modules.product.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NavigableMap;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -15,8 +14,8 @@ import br.com.homolazaus.app.ecommerce.black.red.modules.product.models.entities
 public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
-    public NavigableMap<Double, List<ProductEntity>> findByPrice() {
-        NavigableMap<Double, List<ProductEntity>> map = new TreeMap<>();
+    public TreeMap<Double, List<ProductEntity>> findByPrice() {
+        TreeMap<Double, List<ProductEntity>> map = new TreeMap<>();
 
         Random random = new Random();
 
