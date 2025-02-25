@@ -20,8 +20,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDetailFilterDto listProductsAbovePrice(double price) {
         long start = System.nanoTime();
+
         List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
                 .filter(product -> product.getPrice() >= price).collect(Collectors.toList());
+
         long end = System.nanoTime();
         return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
     }
@@ -29,8 +31,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDetailFilterDto listProductsBelowPrice(double price) {
         long start = System.nanoTime();
+
         List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
                 .filter(product -> product.getPrice() <= price).collect(Collectors.toList());
+
         long end = System.nanoTime();
         return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
     }
