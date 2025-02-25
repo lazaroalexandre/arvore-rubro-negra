@@ -20,20 +20,25 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDetailFilterDto listProductsAbovePrice(double price) {
         long start = System.nanoTime();
-        List<ProductEntity> filterMap = productRepository.findByPrice().tailMap(price).values().stream()
-                .flatMap(List::stream).toList();
+
+        NavigableMap<Double, List<ProductEntity>> filterMap = productRepository.findByPrice().tailMap(price, true);
+        List<ProductEntity> list = new ArrayList<>();
+        filterMap.values().forEach(list::addAll);
+
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(filterMap.size(), (end - start), filterMap);
+        return new ProductDetailFilterDto(list.size(), (end - start), list);
     }
 
     @Override
     public ProductDetailFilterDto listProductsBelowPrice(double price) {
         long start = System.nanoTime();
+
         NavigableMap<Double, List<ProductEntity>> filterMap = productRepository.findByPrice().headMap(price, true);
-        List<ProductEntity> filteredProducts = new ArrayList<>();
-        filterMap.values().forEach(filteredProducts::addAll);
+        List<ProductEntity> list = new ArrayList<>();
+        filterMap.values().forEach(list::addAll);
+
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
+        return new ProductDetailFilterDto(list.size(), (end - start), list);
     }
 
 }
