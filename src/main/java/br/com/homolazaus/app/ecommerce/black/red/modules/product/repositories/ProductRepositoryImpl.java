@@ -24,7 +24,7 @@ public class ProductRepositoryImpl implements ProductRepository {
             String name = "Produto " + i;
             String description = "Descrição do produto " + i + ".";
             int quantity = random.nextInt(100);
-            double price = 1 + 99 * random.nextDouble();
+            double price = 11 + 99 * random.nextDouble();
             produtos.computeIfAbsent(price, k -> new ArrayList<>())
                     .add(new ProductEntity(id, name, description, quantity, price));
         }
