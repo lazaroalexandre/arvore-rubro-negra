@@ -12,9 +12,10 @@ import br.com.homolazaus.app.ecommerce.black.red.modules.product.models.entities
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-    @Override
-    public List<ProductEntity> findByPrice() {
-        List<ProductEntity> map = new ArrayList<>();
+    private final List<ProductEntity> products;
+
+    public ProductRepositoryImpl() {
+        this.products = new ArrayList<>();
 
         Random random = new Random();
 
@@ -24,10 +25,13 @@ public class ProductRepositoryImpl implements ProductRepository {
             String description = "Descrição do produto " + i + ".";
             int quantity = random.nextInt(100);
             double price = 1 + 99 * random.nextDouble();
-            map.add(new ProductEntity(id, name, description, quantity, price));
+            products.add(new ProductEntity(id, name, description, quantity, price));
         }
+    }
 
-        return map;
+    @Override
+    public List<ProductEntity> findByPrice() {
+        return products;
     }
 
 }
