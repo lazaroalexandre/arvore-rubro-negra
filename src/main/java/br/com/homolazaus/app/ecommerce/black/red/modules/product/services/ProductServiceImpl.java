@@ -1,8 +1,8 @@
 package br.com.homolazaus.app.ecommerce.black.red.modules.product.services;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import java.util.stream.Collectors;
+import java.util.NavigableMap;
 
 import org.springframework.stereotype.Service;
 
@@ -21,22 +21,24 @@ public class ProductServiceImpl implements ProductService {
     public ProductDetailFilterDto listProductsAbovePrice(double price) {
         long start = System.nanoTime();
 
-        List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
-                .filter(product -> product.getPrice() >= price).collect(Collectors.toList());
+        NavigableMap<Double, List<ProductEntity>> filterMap = productRepository.findByPrice().tailMap(price, true);
+        List<ProductEntity> list = new ArrayList<>();
+        filterMap.values().forEach(list::addAll);
 
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
+        return new ProductDetailFilterDto(list.size(), (end - start), list);
     }
 
     @Override
     public ProductDetailFilterDto listProductsBelowPrice(double price) {
         long start = System.nanoTime();
 
-        List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
-                .filter(product -> product.getPrice() <= price).collect(Collectors.toList());
+        NavigableMap<Double, List<ProductEntity>> filterMap = productRepository.findByPrice().headMap(price, true);
+        List<ProductEntity> list = new ArrayList<>();
+        filterMap.values().forEach(list::addAll);
 
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
+        return new ProductDetailFilterDto(list.size(), (end - start), list);
     }
 
 }
