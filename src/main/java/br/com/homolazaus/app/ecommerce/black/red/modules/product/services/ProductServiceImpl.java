@@ -1,6 +1,6 @@
 package br.com.homolazaus.app.ecommerce.black.red.modules.product.services;
 
-import java.util.List;
+import java.util.NavigableMap;
 
 import org.springframework.stereotype.Service;
 
@@ -19,22 +19,20 @@ public class ProductServiceImpl implements ProductService {
     public ProductDetailFilterDto listProductsAbovePrice(double price) {
         long start = System.nanoTime();
 
-        List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
-                .filter(product -> product.getPrice() >= price).toList();
-
+        NavigableMap<Double, ProductEntity> filterMap = productRepository.findByPrice().tailMap(price, true);
+        
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
+        return new ProductDetailFilterDto(filterMap.size(), (end - start), filterMap.values());
     }
 
     @Override
     public ProductDetailFilterDto listProductsBelowPrice(double price) {
         long start = System.nanoTime();
 
-        List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
-                .filter(product -> product.getPrice() <= price).toList();
+        NavigableMap<Double, ProductEntity> filterMap = productRepository.findByPrice().headMap(price, true);
 
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
+        return new ProductDetailFilterDto(filterMap.size(), (end - start), filterMap.values());
     }
 
 }
