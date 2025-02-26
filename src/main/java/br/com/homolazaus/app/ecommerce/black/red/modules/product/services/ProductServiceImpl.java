@@ -21,10 +21,10 @@ public class ProductServiceImpl implements ProductService {
     public ProductDetailFilterDto listProductsAbovePrice(double price) {
         long start = System.nanoTime();
 
-        NavigableMap<Double, List<ProductEntity>> filterMap = productRepository.findByPrice().tailMap(price, true);
-        List<ProductEntity> list = new ArrayList<>();
-        filterMap.values().forEach(list::addAll);
-
+        NavigableMap<Double, ProductEntity> filterMap = productRepository.findByPrice().tailMap(price, true);
+/*         List<ProductEntity> list = new ArrayList<>();
+ */        filterMap.values();
+        List<ProductEntity> list = filterMap.values().stream().toList();
         long end = System.nanoTime();
         return new ProductDetailFilterDto(list.size(), (end - start), list);
     }
@@ -33,9 +33,8 @@ public class ProductServiceImpl implements ProductService {
     public ProductDetailFilterDto listProductsBelowPrice(double price) {
         long start = System.nanoTime();
 
-        NavigableMap<Double, List<ProductEntity>> filterMap = productRepository.findByPrice().headMap(price, true);
-        List<ProductEntity> list = new ArrayList<>();
-        filterMap.values().forEach(list::addAll);
+        NavigableMap<Double, ProductEntity> filterMap = productRepository.findByPrice().headMap(price, true);
+        List<ProductEntity> list = filterMap.values().stream().toList();
 
         long end = System.nanoTime();
         return new ProductDetailFilterDto(list.size(), (end - start), list);

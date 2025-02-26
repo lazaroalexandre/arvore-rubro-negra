@@ -1,7 +1,5 @@
 package br.com.homolazaus.app.ecommerce.black.red.modules.product.repositories;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -13,7 +11,7 @@ import br.com.homolazaus.app.ecommerce.black.red.modules.product.models.entities
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
-    private final TreeMap<Double, List<ProductEntity>> produtos;
+    private final TreeMap<Double, ProductEntity> produtos;
 
     public ProductRepositoryImpl() {
         this.produtos = new TreeMap<>();
@@ -25,12 +23,11 @@ public class ProductRepositoryImpl implements ProductRepository {
             String description = "Descrição do produto " + i + ".";
             int quantity = random.nextInt(100);
             double price = 11 + 99 * random.nextDouble();
-            produtos.computeIfAbsent(price, k -> new ArrayList<>())
-                    .add(new ProductEntity(id, name, description, quantity, price));
+            produtos.put(price, new ProductEntity(id, name, description, quantity, price));
         }
     }
     @Override
-    public TreeMap<Double, List<ProductEntity>> findByPrice() {
+    public TreeMap<Double, ProductEntity> findByPrice() {
         return produtos; 
     }
 
