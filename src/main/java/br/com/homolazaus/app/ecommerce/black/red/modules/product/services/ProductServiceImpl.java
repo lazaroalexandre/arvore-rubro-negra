@@ -2,8 +2,6 @@ package br.com.homolazaus.app.ecommerce.black.red.modules.product.services;
 
 import java.util.List;
 
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
 
 import br.com.homolazaus.app.ecommerce.black.red.modules.product.models.dtos.ProductDetailFilterDto;
@@ -22,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
         long start = System.nanoTime();
 
         List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
-                .filter(product -> product.getPrice() >= price).collect(Collectors.toList());
+                .filter(product -> product.getPrice() >= price).toList();
 
         long end = System.nanoTime();
         return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
@@ -33,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
         long start = System.nanoTime();
 
         List<ProductEntity> filteredProducts = productRepository.findByPrice().stream()
-                .filter(product -> product.getPrice() <= price).collect(Collectors.toList());
+                .filter(product -> product.getPrice() <= price).toList();
 
         long end = System.nanoTime();
         return new ProductDetailFilterDto(filteredProducts.size(), (end - start), filteredProducts);
