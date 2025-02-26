@@ -1,10 +1,11 @@
 package br.com.homolazaus.app.ecommerce.black.red.modules.product.models.dtos;
 
 import br.com.homolazaus.app.ecommerce.black.red.modules.product.models.entities.ProductEntity;
-import java.util.List;
+
+import java.util.Collection;
 
 public record ProductDetailFilterDto(
         int total,
         long nanoSeconds,
-        List<ProductEntity> products) {
+        Collection<ProductEntity> products) {
 }
