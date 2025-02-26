@@ -1,8 +1,8 @@
 # Árvore Rubro Negra 
 
-O projeto tem como objetivo exemplificar e comparar o uso árvores rubro negras em uma aplicação com 100.000 (cem mil) produtos cadastrados, nos quais serão filtrados por maior e menor preço. 
+O projeto tem como objetivo exemplificar e comparar o uso de árvores rubro negras em uma aplicação com 100.000 (cem mil) produtos cadastrados, nos quais serão filtrados por maior e menor preço. 
 
-Dessa forma, foi criado 2 (duas) branches para a comparação de desempenho do sistema, no qual na "tree" foi utilizado árvores rubro negras, enquanto na "no-tree" foi utilizada listas normais.
+Dessa forma, foi criado 2 (duas) branches para a comparação de desempenho do sistema, no qual na "tree" foi utilizado árvores rubro negras, enquanto na "no-tree" foram utilizadas listas normais.
 
 ## Tecnologias usadas
 
@@ -46,7 +46,7 @@ Dessa forma, foi criado 2 (duas) branches para a comparação de desempenho do s
 
 ## Conclusão
 
-Ao finalizar o sistema, foi realizado testes com e sem o uso de árvores. Veja o resultado de um desses testes:
+Ao finalizar o sistema, foram realizados testes com e sem o uso de árvores. Veja o resultado de um desses testes ao filtrar produtos acima de R$ 100,00:
 
 **Sem árvores**:
 
