@@ -1,7 +1,5 @@
 package br.com.homolazaus.app.ecommerce.black.red.modules.product.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.NavigableMap;
 
 import org.springframework.stereotype.Service;
@@ -22,11 +20,9 @@ public class ProductServiceImpl implements ProductService {
         long start = System.nanoTime();
 
         NavigableMap<Double, ProductEntity> filterMap = productRepository.findByPrice().tailMap(price, true);
-/*         List<ProductEntity> list = new ArrayList<>();
- */        filterMap.values();
-        List<ProductEntity> list = filterMap.values().stream().toList();
+        
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(list.size(), (end - start), list);
+        return new ProductDetailFilterDto(filterMap.size(), (end - start), filterMap.values());
     }
 
     @Override
@@ -34,10 +30,9 @@ public class ProductServiceImpl implements ProductService {
         long start = System.nanoTime();
 
         NavigableMap<Double, ProductEntity> filterMap = productRepository.findByPrice().headMap(price, true);
-        List<ProductEntity> list = filterMap.values().stream().toList();
 
         long end = System.nanoTime();
-        return new ProductDetailFilterDto(list.size(), (end - start), list);
+        return new ProductDetailFilterDto(filterMap.size(), (end - start), filterMap.values());
     }
 
 }
