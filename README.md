@@ -43,6 +43,23 @@ Dessa forma, foi criado 2 (duas) branches para a comparação de desempenho do s
 
 [endpoints.json](./endpoints.json)
 
+
+## Conclusão
+
+Ao finalizar o sistema, foi realizado testes com e sem o uso de árvores. Veja o resultado de um desses testes:
+
+**Sem árvores**:
+
+	"total": 10139,
+	"nanoSeconds": 2647829
+
+**Com árvores**:
+
+	"total": 10223,
+	"nanoSeconds": 11722
+
+Por fim, com base no experimento, o uso de árvores rubro negras teve um desempenho muito superior, chegando uma diferença maior que 225 vezes, ao filtrar preços de produtos comparado ao uso de listas simples.
+
 ## Autor
 
 Olá, sou o Lázaro Alexandre, um desenvolvedor full stack e futuro analista de sistemas apaixonado por transformar vidas através da inovação tecnológica.
